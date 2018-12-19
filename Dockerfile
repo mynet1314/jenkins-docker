@@ -22,7 +22,8 @@ RUN mkdir -p $JENKINS_HOME \
   && chown ${uid}:${gid} $JENKINS_HOME \
   && groupadd -g ${gid} ${group} \
   && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user} \
-  && echo "docker:x:${dockerGid}:jenkins" >> /etc/group
+  && echo "docker:x:${dockerGid}:jenkins" >> /etc/group \
+  && usermod -a -G root jenkins
 
 
 # Jenkins home directory is a volume, so configuration and build history
